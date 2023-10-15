@@ -23,7 +23,10 @@ public class Launcher {
 
         try {
 
-            args = new String[] {"--command", "FISCAL", "--sync", "-b"};
+            if (System.getenv("STAGING") != null) {
+                args = new String[]{"--command", "queryTags", "--arg", "ALTERDATA_PACK", "--sync", "-b"};
+                System.out.println("STAGING");
+            }
 
             Options options = new Options();
 
@@ -38,7 +41,7 @@ public class Launcher {
 
             options.addOption(DEBUG_MODE[0], DEBUG_MODE[1], false, "Modo debug");
 
-            options.addOption(ARGUMENT[0], ARGUMENT[1], false,
+            options.addOption(ARGUMENT[0], ARGUMENT[1], true,
                     "Argumentos requeridos pelo comando");
 
             CommandLineParser commandLineParser = new DefaultParser();
